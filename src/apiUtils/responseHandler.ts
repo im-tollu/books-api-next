@@ -1,3 +1,4 @@
+import { TenantAlreadyRegistered } from "@/lib/errors"
 import { NextResponse } from "next/server"
 
 type ApiHandler = () => Promise<object> | object
@@ -15,6 +16,8 @@ export async function handleErrors(handler: ApiHandler): Promise<NextResponse> {
         })
     } catch (error: unknown) {
         if (error instanceof Error) {
+            console.log('error', error)
+
             return NextResponse.json(
                 {
                     success: false,
